@@ -6,7 +6,10 @@ import day3
 import day4
 import day5
 import day6
-
+import day7
+import day8
+import day9
+import day10
 
 skip_completed = pytest.mark.skipif(True, reason="Day completed")
 
@@ -137,17 +140,102 @@ class TestDay5:
         run(self.problem, day5.part2)
 
 
+@skip_completed
 class TestDay6:
     problem = "Day6/input.txt"
     sample1 = "Day6/sample1.txt"
     sample2 = "Day6/sample2.txt"
     sample3 = "Day6/sample3.txt"
+    sample4 = "Day6/sample4.txt"
+    sample5 = "Day6/sample5.txt"
 
     @pytest.mark.parametrize("sample,expected", [
-        (sample1, )
+        (sample1, 1000000), (sample2, 999000), (sample3, 998996),
+        (sample4, 1), (sample5, 999999)
     ])
-    def test_sample(self):
-        check(self.sample1, day6.part1, 0)
+    def test_sample(self, sample, expected):
+        check(sample, day6.part1, expected)
 
     def test_part1(self):
         run(self.problem, day6.part1)
+
+    @pytest.mark.parametrize("sample,expected", [
+        (sample1, 1000000), (sample2, 1002000), (sample3, 1001996),
+        (sample4, 1), (sample5, 2000001)
+    ])
+    def test_sample2(self, sample, expected):
+        check(sample, day6.part2, expected)
+
+    def test_part2(self):
+        run(self.problem, day6.part2)
+
+
+@skip_completed
+class TestDay7:
+    problem = "Day7/input.txt"
+    problem2 = "Day7/input2.txt"
+    sample1 = "Day7/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day7.part1, {'d': 72, 'e': 507, 'f': 492,
+                                         'g': 114, 'h': 65412, 'i': 65079,
+                                         'x': 123, 'y': 456})
+
+    def test_part1(self):
+        run(self.problem, day7.part1)
+
+    def test_part2(self):
+        run(self.problem2, day7.part2)
+
+
+@skip_completed
+class TestDay8:
+    problem = "Day8/input.txt"
+    sample1 = "Day8/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day8.part1, 12)
+
+    def test_part1(self):
+        run(self.problem, day8.part1)
+
+    def test_sample2(self):
+        check(self.sample1, day8.part2, 19)
+
+    def test_part2(self):
+        run(self.problem, day8.part2)
+
+
+@skip_completed
+class TestDay9:
+    problem = "Day9/input.txt"
+    sample1 = "Day9/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day9.part1, 605)
+
+    def test_part1(self):
+        run(self.problem, day9.part1)
+
+    def test_sample2(self):
+        check(self.sample1, day9.part2, 982)
+
+    def test_part2(self):
+        run(self.problem, day9.part2)
+
+
+class TestDay10:
+    problem = "Day10/input.txt"
+    sample1 = "Day10/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day10.part1, 82350)
+
+    def test_part1(self):
+        run(self.problem, day10.part1)
+
+    def test_sample2(self):
+        check(self.sample1, day10.part2, 1166642)
+
+    def test_part2(self):
+        run(self.problem, day10.part2)
