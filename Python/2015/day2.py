@@ -1,10 +1,14 @@
 # Determine the amount of wrapping paper and ribbon needed for packages
+def parse_dimensions(dimensions):
+    return list(map(int, dimensions.split('x')))
+
+
 def part1(values):
     # Wrapping paper dimensions are given as height x width x depth
     # Surface area is calculated as each side plus smallest side once as extra area
     total_surface_area = 0
     for dimensions in values:
-        height,width,depth = list(map(int, dimensions.split('x')))
+        height,width,depth = parse_dimensions(dimensions)
         height_width = height * width
         height_depth = height * depth
         width_depth = width * depth
@@ -19,7 +23,7 @@ def part2(values):
     # Ribbon length is calculated as the shortest diameter plus total volume of box
     total_length = 0
     for dimensions in values:
-        height,width,depth = list(map(int, dimensions.split('x')))
+        height,width,depth = parse_dimensions(dimensions)
         height_width_dia = 2 * height + 2 * width
         height_depth_dia = 2 * height + 2 * depth
         width_depth_dia = 2 * width + 2 * depth

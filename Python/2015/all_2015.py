@@ -5,6 +5,7 @@ import day2
 import day3
 import day4
 import day5
+import day6
 
 
 skip_completed = pytest.mark.skipif(True, reason="Day completed")
@@ -117,6 +118,7 @@ class TestDay4:
         run(self.problem, day4.part2)
 
 
+@skip_completed
 class TestDay5:
     problem = "Day5/input.txt"
     sample1 = "Day5/sample1.txt"
@@ -133,3 +135,19 @@ class TestDay5:
 
     def test_part2(self):
         run(self.problem, day5.part2)
+
+
+class TestDay6:
+    problem = "Day6/input.txt"
+    sample1 = "Day6/sample1.txt"
+    sample2 = "Day6/sample2.txt"
+    sample3 = "Day6/sample3.txt"
+
+    @pytest.mark.parametrize("sample,expected", [
+        (sample1, )
+    ])
+    def test_sample(self):
+        check(self.sample1, day6.part1, 0)
+
+    def test_part1(self):
+        run(self.problem, day6.part1)
