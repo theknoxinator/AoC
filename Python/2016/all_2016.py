@@ -10,6 +10,21 @@ import day7
 import day8
 import day9
 import day10
+import day11
+import day12
+import day13
+import day14
+import day15
+import day16
+import day17
+import day18
+import day19
+import day20
+import day21
+import day22
+import day23
+import day24
+import day25
 
 
 class TestDay1:
@@ -181,3 +196,217 @@ class TestDay10:
 
     def test_part2(self):
         run(self.problem, day10.part2)
+
+
+class TestDay11:
+    problem = "Day11/input.txt"
+
+    # Never finished this one, and have no intention to do so, does not actually work
+    def test_part1(self):
+        run(self.problem, day11.part1)
+
+
+class TestDay12:
+    problem = "Day12/input.txt"
+    sample1 = "Day12/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day12.part1, {'a': 42, 'b': 0, 'c': 0, 'd': 0})
+
+    def test_part1(self):
+        run(self.problem, day12.part1)
+
+    def test_part2(self):
+        run(self.problem, day12.part2)
+
+
+class TestDay13:
+    problem = "Day13/input.txt"
+    sample1 = "Day13/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day13.part1, 11)
+
+    def test_part1(self):
+        run(self.problem, day13.part1)
+
+    def test_part2(self):
+        run(self.problem, day13.part2)
+
+
+class TestDay14:
+    problem = "Day14/input.txt"
+    sample1 = "Day14/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day14.part1, 22728)
+
+    def test_part1(self):
+        run(self.problem, day14.part1)
+
+    def test_sample2(self):
+        check(self.sample1, day14.part2, 22859)
+
+    def test_part2(self):
+        run(self.problem, day14.part2)
+
+
+class TestDay15:
+    problem = "Day15/input.txt"
+    sample1 = "Day15/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day15.part1, 5)
+
+    def test_part1(self):
+        run(self.problem, day15.part1)
+
+    def test_part2(self):
+        run(self.problem, day15.part2)
+
+
+class TestDay16:
+    problem = "Day16/input.txt"
+    sample1 = "Day16/sample1.txt"
+    sample2 = "Day16/sample2.txt"
+
+    @pytest.mark.parametrize("sample,expected", [
+        (sample1, "100"), (sample2, "01100")
+    ])
+    def test_sample(self, sample, expected):
+        check(sample, day16.part1, expected)
+
+    def test_part1(self):
+        run(self.problem, day16.part1)
+
+    def test_part2(self):
+        run(self.problem, day16.part2)
+
+
+class TestDay17:
+    problem = "Day17/input.txt"
+    sample1 = "Day17/sample1.txt"
+    sample2 = "Day17/sample2.txt"
+    sample3 = "Day17/sample3.txt"
+
+    @pytest.mark.parametrize("sample,expected", [
+        (sample1, "DDRRRD"), (sample2, "DDUDRLRRUDRD"), (sample3, "DRURDRUDDLLDLUURRDULRLDUUDDDRR")
+    ])
+    def test_sample(self, sample, expected):
+        check(sample, day17.part1, expected)
+
+    def test_part1(self):
+        run(self.problem, day17.part1)
+
+    @pytest.mark.parametrize("sample,expected", [
+        (sample1, 370), (sample2, 492), (sample3, 830)
+    ])
+    def test_sample2(self, sample, expected):
+        check(sample, day17.part2, expected)
+
+    def test_part2(self):
+        run(self.problem, day17.part2)
+
+
+class TestDay18:
+    problem = "Day18/input.txt"
+    sample1 = "Day18/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day18.part1, 38)
+
+    def test_part1(self):
+        run(self.problem, day18.part1)
+
+    def test_part2(self):
+        run(self.problem, day18.part2)
+
+
+class TestDay19:
+    problem = "Day19/input.txt"
+    sample1 = "Day19/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day19.part1, 3)
+
+    def test_part1(self):
+        run(self.problem, day19.part1)
+
+    def test_sample2(self):
+        check(self.sample1, day19.part2, 2)
+
+    def test_part2(self):
+        run(self.problem, day19.part2)
+
+
+class TestDay20:
+    problem = "Day20/input.txt"
+    sample1 = "Day20/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day20.part1, 3)
+
+    def test_part1(self):
+        run(self.problem, day20.part1)
+
+    def test_part2(self):
+        run(self.problem, day20.part2)
+
+
+class TestDay21:
+    problem = "Day21/input.txt"
+    sample1 = "Day21/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day21.part1, "decab")
+
+    def test_part1(self):
+        run(self.problem, day21.part1)
+
+    def test_part2(self):
+        run(self.problem, day21.part2)
+
+
+class TestDay22:
+    problem = "Day22/input.txt"
+
+    def test_part1(self):
+        run(self.problem, day22.part1)
+
+    def test_part2(self):
+        run(self.problem, day22.part2)
+
+
+class TestDay23:
+    problem = "Day23/input.txt"
+    sample1 = "Day23/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day23.part1, {'a': 3, 'b': 0, 'c': 0, 'd': 0})
+
+    def test_part1(self):
+        run(self.problem, day23.part1)
+
+    def test_part2(self):
+        run(self.problem, day23.part2)
+
+
+class TestDay24:
+    problem = "Day24/input.txt"
+    sample1 = "Day24/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day24.part1, 14)
+
+    def test_part1(self):
+        run(self.problem, day24.part1)
+
+    def test_part2(self):
+        run(self.problem, day24.part2)
+
+
+class TestDay25:
+    problem = "Day25/input.txt"
+
+    def test_part1(self):
+        run(self.problem, day25.part1)
