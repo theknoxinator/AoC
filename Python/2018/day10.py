@@ -1,53 +1,7 @@
 # Determine the message being written in the sky by points moving at a constant velocity and intersect at
 # one second to display the message
 
-def read_file(filename):
-    values = []
-    with open(filename, 'r') as f:
-        for line in f:
-            values.append(line)
-
-    return values
-
-def test_data():
-    return ["position=< 9,  1> velocity=< 0,  2>",
-            "position=< 7,  0> velocity=<-1,  0>",
-            "position=< 3, -2> velocity=<-1,  1>",
-            "position=< 6, 10> velocity=<-2, -1>",
-            "position=< 2, -4> velocity=< 2,  2>",
-            "position=<-6, 10> velocity=< 2, -2>",
-            "position=< 1,  8> velocity=< 1, -1>",
-            "position=< 1,  7> velocity=< 1,  0>",
-            "position=<-3, 11> velocity=< 1, -2>",
-            "position=< 7,  6> velocity=<-1, -1>",
-            "position=<-2,  3> velocity=< 1,  0>",
-            "position=<-4,  3> velocity=< 2,  0>",
-            "position=<10, -3> velocity=<-1,  1>",
-            "position=< 5, 11> velocity=< 1, -2>",
-            "position=< 4,  7> velocity=< 0, -1>",
-            "position=< 8, -2> velocity=< 0,  1>",
-            "position=<15,  0> velocity=<-2,  0>",
-            "position=< 1,  6> velocity=< 1,  0>",
-            "position=< 8,  9> velocity=< 0, -1>",
-            "position=< 3,  3> velocity=<-1,  1>",
-            "position=< 0,  5> velocity=< 0, -1>",
-            "position=<-2,  2> velocity=< 2,  0>",
-            "position=< 5, -2> velocity=< 1,  2>",
-            "position=< 1,  4> velocity=< 2,  1>",
-            "position=<-2,  7> velocity=< 2, -2>",
-            "position=< 3,  6> velocity=<-1, -1>",
-            "position=< 5,  0> velocity=< 1,  0>",
-            "position=<-6,  0> velocity=< 2,  0>",
-            "position=< 5,  9> velocity=< 1, -2>",
-            "position=<14,  7> velocity=<-2,  0>",
-            "position=<-3,  6> velocity=< 2, -1>"]
-
-if __name__ == '__main__':
-    print("Starting Day10-1")
-    # Read file into list of values
-    values = read_file('input.txt')
-    #values = test_data()
-
+def write_message(values):
     # First, take all initial values and put them into two arrays for easy lookup (can't use dictionary
     # as points will cross each other and cancel out)
     positions = []
@@ -70,18 +24,6 @@ if __name__ == '__main__':
             max_y = y
         positions.append((x,y))
         velocities.append(velocity)
-
-    # Print out the initial state
-    '''
-    for row in range(min_y - 2, max_y + 3):
-        for col in range(min_x - 2, max_x + 3):
-            if (col,row) in positions:
-                print('#', end='')
-            else:
-                print('.', end='')
-        print('', flush=True)
-    print()
-    '''
 
     # Now, have the points move each "second", print out the new positions, and only continue on user input
     last_min_x = 0
@@ -142,4 +84,12 @@ if __name__ == '__main__':
             else:
                 print('.', end='')
         print('', flush=True)
-    print("Number of seconds it took: {0!s}".format(seconds))
+    return seconds
+
+
+def part1(values):
+    return write_message(values)
+
+
+def part2(values):
+    return write_message(values)

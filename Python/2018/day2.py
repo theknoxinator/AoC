@@ -2,23 +2,7 @@
 # Checksum is created by multiplying the number of IDs with at least one letter that occurs twice
 # with the number of IDs with at least one letter that occurs thrice
 
-def read_file(filename):
-    values = []
-    with open(filename, 'r') as f:
-        for line in f:
-            values.append(line.strip())
-
-    return values
-
-def test_data():
-    return ["abcdef", "bababc", "abbcde", "abcccd", "aabcdd", "abcdee", "ababab"]
-
-if __name__ == '__main__':
-    print("Starting Day 2-1")
-    # Read file into list of values
-    values = read_file('input.txt')
-    #values = test_data()
-
+def gen_checksum(values):
     # Iterate and check to see if value has letters that repeat twice or thrice
     twice = 0
     thrice = 0
@@ -45,11 +29,30 @@ if __name__ == '__main__':
         if has_thrice:
             thrice += 1
 
-        print("For ID: {0}, counts: {1}".format(val, ','.join(map(str, counts))))
-        print("For ID: {0}, has twice: {1}, has thrice: {2}".format(val, str(has_twice), str(has_thrice)))
-
     # Calculate the checksum
     checksum = twice * thrice
+    return checksum
 
-    # Print out answer
-    print("The final checksum is: {0}".format(str(checksum)))
+
+def find_common_ids(values):
+    # Iterate through list and compare each ID to every other ID
+    common_id = ""
+    for i in range(len(values)):
+        for j in range(i + 1, len(values)):
+            first_id = values[i]
+            second_id = values[j]
+            for k in range(len(first_id)):
+                alt_first_id = first_id[:k] + first_id[k + 1:]
+                alt_second_id = second_id[:k] + second_id[k + 1:]
+                if alt_first_id == alt_second_id:
+                    common_id = alt_first_id
+
+    return common_id
+
+
+def part1(values):
+    return gen_checksum(values)
+
+
+def part2(values):
+    return find_common_ids(values)

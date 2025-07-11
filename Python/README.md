@@ -66,7 +66,7 @@
 
 **Part 2 Completed:** 19/25
 
-**Converted:** 0/19
+**Converted:** 10/19
 
 **TODO:**
 * Day 20
