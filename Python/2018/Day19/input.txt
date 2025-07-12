@@ -5,7 +5,7 @@ seti 1 7 5
 mulr 3 5 4
 eqrr 4 2 4
 addr 4 1 1
-addi 1 2 1
+addi 1 1 1
 addr 3 0 0
 addi 5 1 5
 gtrr 5 2 4

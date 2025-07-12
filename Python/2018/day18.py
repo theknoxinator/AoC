@@ -2,62 +2,35 @@
 # of time. The acres change based on their neighbors.
 from datetime import datetime
 
-def read_file(filename):
-    values = []
-    with open(filename, 'r') as f:
-        for line in f:
-            values.append(line.strip())
-
-    return values
-
-
-def test_data():
-    return [".#.#...|#.",
-            ".....#|##|",
-            ".|..|...#.",
-            "..|#.....#",
-            "#.#|||#|#|",
-            "...#.||...",
-            ".|....|...",
-            "||...#|.#|",
-            "|.||||..|.",
-            "...#.|..|."]
-
-
-if __name__ == '__main__':
-    print("Starting Day 18-1")
-    # Read file into list of values
-    values = read_file('input.txt')
-    # values = test_data()
-
+def calc_lumber(values, num_loops=10):
     # Convert the input into a grid
     grid = []
     for val in values:
         grid.append(list(val))
 
     # Debug print out initial grid
-    for row in grid:
-        print(''.join(row))
-    print()
+    # for row in grid:
+    #     print(''.join(row))
+    # print()
 
     # For this problem, we are going to iterate through each cell, which is an acre, look at the 8 (or less)
     # adjacent cells, and determine what the cell will look like on the next step. New steps are going into
     # a new grid of the same size as the existing one, which overwrites the existing grid upon completion.
     new_grid = [[''] * len(grid) for i in range(len(grid))]
-    for loops in range(1000000000):
-        if loops % 1000 == 0:
-            print("{0!s}: {1!s}".format(loops, datetime.now()))
-            total_woods = 0
-            total_lumberyards = 0
-            for row in grid:
-                for cell in row:
-                    if cell == '|':
-                        total_woods += 1
-                    elif cell == '#':
-                        total_lumberyards += 1
-            print(
-                "The number of woods is: {0!s}, and number of lumberyards is: {1!s}, which creates total resource value of {2!s}".format(
-                    total_woods, total_lumberyards, total_woods * total_lumberyards))
+    for loops in range(num_loops):
+        # if loops % 1000 == 0:
+        #     print("{0!s}: {1!s}".format(loops, datetime.now()))
+        #     total_woods = 0
+        #     total_lumberyards = 0
+        #     for row in grid:
+        #         for cell in row:
+        #             if cell == '|':
+        #                 total_woods += 1
+        #             elif cell == '#':
+        #                 total_lumberyards += 1
+        #     print(
+        #         "The number of woods is: {0!s}, and number of lumberyards is: {1!s}, which creates total resource value of {2!s}".format(
+        #             total_woods, total_lumberyards, total_woods * total_lumberyards))
         for y in range(len(grid)):
             for x in range(len(grid[y])):
                 # Get the current cell for later
@@ -133,3 +106,12 @@ if __name__ == '__main__':
     print(
         "The number of woods is: {0!s}, and number of lumberyards is: {1!s}, which creates total resource value of {2!s}".format(
             total_woods, total_lumberyards, total_woods * total_lumberyards))
+    return total_woods * total_lumberyards
+
+
+def part1(values):
+    return calc_lumber(values, 10)
+
+
+def part2(values):
+    return calc_lumber(values, 1000000000)

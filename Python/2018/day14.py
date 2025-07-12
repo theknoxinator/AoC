@@ -1,17 +1,15 @@
 # Figure out the next ten recipes after a given number of recipes where new recipes are created based on
 # existing ones
 
-TARGET_RECIPE = 765071
+# Due to the nature of the algorithm involved, it makes the most sense to just use a singly-linked list
+class Node:
+    def __init__(self, index, value, next=None):
+        self.index = index
+        self.value = value
+        self.next = next
 
-if __name__ == '__main__':
-    print("Starting Day 14-1")
-
-    # Due to the nature of the algorithm involved, it makes the most sense to just use a singly-linked list
-    class Node:
-        def __init__(self, index, value, next=None):
-            self.index = index
-            self.value = value
-            self.next = next
+def find_recipes(values):
+    target_recipe = int(values[0])
 
     # We start with 3 and 7 already defined as the head and tail, and list circles so tail always has head
     # as the next node
@@ -26,13 +24,6 @@ if __name__ == '__main__':
     first = head
     second = tail
     while len(ten_recipes) < 10:
-        # Debug print out the list
-        # runner = head
-        # while runner != tail:
-        #     print(str(runner.value), end='')
-        #     runner = runner.next
-        # print(str(tail.value))
-
         # Get the two recipes being looked at by the first and second runners
         first_recipe = first.value
         second_recipe = second.value
@@ -42,7 +33,7 @@ if __name__ == '__main__':
         if sum >= 10:
             new_recipe = int(sum / 10)
             new_index = tail.index + 1
-            if new_index > TARGET_RECIPE:
+            if new_index > target_recipe:
                 # We are beyond the target, so append this to the end recipes
                 ten_recipes.append(new_recipe)
             new_node = Node(new_index, new_recipe, head)
@@ -52,7 +43,7 @@ if __name__ == '__main__':
 
         # In all cases, add the ones digit as a new recipe
         new_index = tail.index + 1
-        if new_index > TARGET_RECIPE:
+        if new_index > target_recipe:
             # We are beyond the target, so append this to the end recipes
             ten_recipes.append(sum)
         new_node = Node(new_index, sum, head)
@@ -69,4 +60,28 @@ if __name__ == '__main__':
 
     # Print out answer
     ten_recipes = ten_recipes[0:10] # Trim in case there's more than ten
-    print("The ten recipes are: {0}".format(''.join(map(str, ten_recipes))))
+    return ''.join(map(str, ten_recipes))
+
+
+def find_recipes2(values):
+    target_recipe = values[0]
+
+    # Trying different algorithm based on something found online, uses a string to store the values instead
+    # of a linked list, much less memory that way
+    recipes = "37"  # Starting recipes
+    first = 0  # Starting index
+    second = 1
+    while target_recipe not in recipes[-7:]:
+        recipes = recipes + str(int(recipes[first]) + int(recipes[second]))
+        first = (first + int(recipes[first]) + 1) % len(recipes)
+        second = (second + int(recipes[second]) + 1) % len(recipes)
+
+    return recipes.index(target_recipe)
+
+
+def part1(values):
+    return find_recipes(values)
+
+
+def part2(values):
+    return find_recipes2(values)

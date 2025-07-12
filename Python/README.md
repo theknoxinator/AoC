@@ -29,7 +29,7 @@
 
 **Part 2 Completed:** 19/25
 
-**Converted:** 0/25
+**Converted:** 0/20
 
 **TODO:**
 * Day 20.2
@@ -44,7 +44,7 @@
 
 **Part 2 Completed:** 12/25
 
-**Converted:** 0/20
+**Converted:** 0/12
 
 **TODO:**
 * Day 13
@@ -65,8 +65,6 @@
 **Part 1 Completed:** 19/25
 
 **Part 2 Completed:** 19/25
-
-**Converted:** 10/19
 
 **TODO:**
 * Day 20

@@ -1,149 +1,75 @@
 # Determine the outcome of combat between elves and goblins using simple pathfinding and combat mechanics
 from collections import deque
 
+# First we want to translate the starting map into a grid that we can use for computing, so instead of
+# simple characters we will use objects
+class Space:
+    def __init__(self):
+        pass
 
-def read_file(filename):
-    values = []
-    with open(filename, 'r') as f:
-        for line in f:
-            values.append(line.rstrip())
-
-    return values
-
-
-def test_data():
-    # return ["#######",
-    #         "#.G...#",
-    #         "#...EG#",
-    #         "#.#.#G#",
-    #         "#..G#E#",
-    #         "#.....#",
-    #         "#######"]
-
-    # return ["#######",
-    #         "#G..#E#",
-    #         "#E#E.E#",
-    #         "#G.##.#",
-    #         "#...#E#",
-    #         "#...E.#",
-    #         "#######"]
-
-    # return ["#######",
-    #         "#E..EG#",
-    #         "#.#G.E#",
-    #         "#E.##E#",
-    #         "#G..#.#",
-    #         "#..E#.#",
-    #         "#######"]
-
-    # return ["#######",
-    #         "#E.G#.#",
-    #         "#.#G..#",
-    #         "#G.#.G#",
-    #         "#G..#.#",
-    #         "#...E.#",
-    #         "#######"]
-
-    # return ["#######",
-    #         "#.E...#",
-    #         "#.#..G#",
-    #         "#.###.#",
-    #         "#E#G#G#",
-    #         "#...#G#",
-    #         "#######"]
-
-    return ["#########",
-            "#G......#",
-            "#.E.#...#",
-            "#..##..G#",
-            "#...##..#",
-            "#...#...#",
-            "#.G...G.#",
-            "#.....G.#",
-            "#########"]
+    def as_char(self):
+        return '.'
 
 
-if __name__ == '__main__':
-    print("Starting Day 15-1")
-    # Read file into list of values
-    values = read_file('input.txt')
-    # values = test_data()
+class Wall(Space):
+    def __init__(self):
+        super().__init__()
+
+    def as_char(self):
+        return '#'
 
 
-    # First we want to translate the starting map into a grid that we can use for computing, so instead of
-    # simple characters we will use objects
-    class Space:
-        def __init__(self):
-            pass
+class Elf(Space):
+    def __init__(self, attack_power):
+        super().__init__()
+        self.hit_points = 200
+        self.turns = 0
+        self.attack = attack_power
 
-        def as_char(self):
-            return '.'
+    def as_char(self):
+        return 'E'
 
+    def is_enemy(self, other):
+        return isinstance(other, Goblin)
 
-    class Wall(Space):
-        def __init__(self):
-            super().__init__()
-
-        def as_char(self):
-            return '#'
-
-
-    class Elf(Space):
-        def __init__(self):
-            super().__init__()
-            self.hit_points = 200
-            self.turns = 0
-
-        def as_char(self):
-            return 'E'
-
-        def is_enemy(self, other):
-            return isinstance(other, Goblin)
-
-        def is_ally(self, other):
-            return isinstance(other, Elf)
+    def is_ally(self, other):
+        return isinstance(other, Elf)
 
 
-    class Goblin(Space):
-        def __init__(self):
-            super().__init__()
-            self.hit_points = 200
-            self.turns = 0
+class Goblin(Space):
+    def __init__(self):
+        super().__init__()
+        self.hit_points = 200
+        self.turns = 0
+        self.attack = 3
 
-        def as_char(self):
-            return 'G'
+    def as_char(self):
+        return 'G'
 
-        def is_enemy(self, other):
-            return isinstance(other, Elf)
+    def is_enemy(self, other):
+        return isinstance(other, Elf)
 
-        def is_ally(self, other):
-            return isinstance(other, Goblin)
+    def is_ally(self, other):
+        return isinstance(other, Goblin)
 
 
+def run_combat(values, use_part2=False):
     # Now translate the map into objects in a grid
     grid = []
+    starting_elves = 0
     for val in values:
         row = []
         for char in val:
             if char == '#':
                 row.append(Wall())
             elif char == 'E':
-                row.append(Elf())
+                row.append(Elf(19))
+                starting_elves += 1
             elif char == 'G':
                 row.append(Goblin())
             else:
                 row.append(Space())
         grid.append(row)
-
-    # Debug print out starting map
-    for row in grid:
-        chars = []
-        for cell in row:
-            if isinstance(cell, (Elf, Goblin)):
-                chars.append(cell)
-            print(cell.as_char(), end='')
-        print("   {0}".format(','.join([char.as_char() + '(' + str(char.hit_points) + ')' for char in chars])))
-    print()
 
 
     # Now for the big algorithm to determine what each character on the field does
@@ -153,7 +79,7 @@ if __name__ == '__main__':
     # Third, if there is a path, take the quickest one according to the priority rules
     # To make sure each character only takes one turn, a turn tracker will be used on each object since we
     # will not be replacing the whole map each time
-    def attempt_attack(current_char, char_point):
+    def attempt_attack(current_char, char_point, use_part2=False):
         # Check adjacencies for enemies
         x, y = char_point
         point_to_attack = None
@@ -175,7 +101,10 @@ if __name__ == '__main__':
         if point_to_attack:
             # There is an enemy to attack, so do so and move to next character
             enemy = grid[point_to_attack[1]][point_to_attack[0]]
-            enemy.hit_points -= 3
+            if use_part2:
+                enemy.hit_points -= current_char.attack
+            else:
+                enemy.hit_points -= 3
             if enemy.hit_points <= 0:
                 grid[point_to_attack[1]][point_to_attack[0]] = Space()
             return True
@@ -271,7 +200,7 @@ if __name__ == '__main__':
                     continue
 
                 # Try to attack if an enemy is adjacent
-                if attempt_attack(current_char, (x, y)):
+                if attempt_attack(current_char, (x, y), use_part2):
                     current_char.turns += 1
                     continue
 
@@ -280,19 +209,9 @@ if __name__ == '__main__':
                 if path_result:
                     new_x, new_y = move((x, y), path_result)
                     # Now that character has moved, check again for enemies to attack
-                    attempt_attack(current_char, (new_x, new_y))
+                    attempt_attack(current_char, (new_x, new_y), use_part2)
 
                 current_char.turns += 1
-
-        print("Turn {0!s}".format(turns))
-        for row in grid:
-            chars = []
-            for cell in row:
-                if isinstance(cell, (Elf, Goblin)):
-                    chars.append(cell)
-                print(cell.as_char(), end='')
-            print("   {0}".format(','.join([char.as_char() + '(' + str(char.hit_points) + ')' for char in chars])))
-        print()
 
         # At the end of the turn, we need to check to see if one side has won or not
         num_elves = 0
@@ -310,8 +229,20 @@ if __name__ == '__main__':
 
     # Figure out the outcome, which is turns times HP left on remaining characters
     total_hp = 0
+    ending_elves = 0
     for row in grid:
         for cell in row:
+            if isinstance(cell, Elf):
+                ending_elves += 1
             if isinstance(cell, (Elf, Goblin)):
                 total_hp += cell.hit_points
     print("The outcome of the battle is: {0!s} or {1!s}".format(total_hp * (turns - 1), total_hp * turns))
+    return total_hp * (turns - 1)
+
+
+def part1(values):
+    return run_combat(values)
+
+
+def part2(values):
+    return run_combat(values, True)

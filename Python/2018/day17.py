@@ -2,32 +2,7 @@
 # and clay blocks flow such that it moves left and right
 from collections import deque
 
-def read_file(filename):
-    values = []
-    with open(filename, 'r') as f:
-        for line in f:
-            values.append(line.strip())
-
-    return values
-
-
-def test_data():
-    return ["x=495, y=2..7",
-            "y=7, x=495..501",
-            "x=501, y=3..7",
-            "x=498, y=2..4",
-            "x=506, y=1..2",
-            "x=498, y=10..13",
-            "x=504, y=10..13",
-            "y=13, x=498..504"]
-
-
-if __name__ == '__main__':
-    print("Starting Day 17-1")
-    # Read file into list of values
-    values = read_file('input.txt')
-    # values = test_data()
-
+def waterfall_hell(values):
     # Create the initial grid with all sand
     grid = [['.'] * 1000 for i in range(2000)]
     # Put in the fountain at 500,0
@@ -227,11 +202,11 @@ if __name__ == '__main__':
         flow_down(x, y)
 
     # Print out grid again
-    for y in range(0, max_y + 2):
-        print("{0!s:>4}".format(y), end='')
-        for x in range(min_x - 1, max_x + 2):
-            print(grid[y][x], end='')
-        print()
+    # for y in range(0, max_y + 2):
+    #     print("{0!s:>4}".format(y), end='')
+    #     for x in range(min_x - 1, max_x + 2):
+    #         print(grid[y][x], end='')
+    #     print()
 
     # Print out answer
     water_tiles = 0
@@ -245,3 +220,12 @@ if __name__ == '__main__':
 
     print("Number of water tiles: {0!s}".format(water_tiles))
     print("Number of standing water tiles: {0!s}".format(standing_water_tiles))
+    return water_tiles, standing_water_tiles
+
+
+def part1(values):
+    return waterfall_hell(values)[0]
+
+
+def part2(values):
+    return waterfall_hell(values)[1]

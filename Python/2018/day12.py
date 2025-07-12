@@ -1,37 +1,40 @@
 # Determine the number of pots that have plants after a number of generations where new plants appear
 # based on defined rules and an initial state
 
-def read_file(filename):
-    values = []
-    with open(filename, 'r') as f:
-        for line in f:
-            values.append(line)
+def determine_pots(values):
+    # Get all the data from the file and parse it appropriately
+    start_state = []
+    transitions = {}
+    for val in values:
+        if "initial" in val:
+            items = val.split()
+            start_state = ['.'] * 20 + list(items[2]) + ['.'] * 30
+        else:
+            items = val.split()
+            transitions[items[0]] = items[2]
 
-    return values
+    # Iterate through each spot, check its surroundings, and determine what the next state looks like
+    current_state = start_state
+    for gen in range(20):
+        # Create a new state and figure out where plants are
+        new_state = ['.'] * len(current_state)
+        for index in range(2, len(current_state) - 2):
+            plant_check = str(''.join(current_state[index-2:index+3]))
+            if plant_check in transitions:
+                new_state[index] = transitions[plant_check]
 
-def test_data():
-    return ["initial state: #..#.#..##......###...###",
-            "...## => #",
-            "..#.. => #",
-            ".#... => #",
-            ".#.#. => #",
-            ".#.## => #",
-            ".##.. => #",
-            ".#### => #",
-            "#.#.# => #",
-            "#.### => #",
-            "##.#. => #",
-            "##.## => #",
-            "###.. => #",
-            "###.# => #",
-            "####. => #"]
+        # Set new state to current and go again
+        current_state = new_state
 
-if __name__ == '__main__':
-    print("Starting Day 12-2")
-    # Read file into list of values
-    values = read_file('input.txt')
-    #values = test_data()
+    # Print out answer
+    plant_sum = 0
+    for index in range(len(current_state)):
+        if current_state[index] == '#':
+            plant_sum += (index - 20)
+    return plant_sum
 
+
+def determine_pots2(values):
     # Get all the data from the file and parse it appropriately
     # Unlike the first one, since we need to iterate 50 billion times, an array won't do, we will need to
     # use a linked list
@@ -82,15 +85,11 @@ if __name__ == '__main__':
                 plant_sum += current_node.index
             current_node = current_node.next
         print("Total sum is: {0!s}".format(plant_sum))
+        return plant_sum
 
     # Iterate through each spot, check its surroundings, and determine what the next state looks like
     TOTAL_GENS = 500000
     for gen in range(TOTAL_GENS):
-        # Debug print out how far we are
-        if gen % 1000 == 0:
-            print("[{0!s}]: {1}".format(gen, list_to_string(head)))
-            print_sum(head)
-
         # Start at the head and go backwards if necessary
         while head.value == '#' or head.next.value == '#' or head.next.next.value == '#' or head.next.next.next.value == '#':
             new_node = Node(head.index - 1, '.')
@@ -141,6 +140,12 @@ if __name__ == '__main__':
                 current_node.new_value = None
             current_node = current_node.next
 
-    # Print out answer
-    print("[{0!s}]: {1}".format(TOTAL_GENS, list_to_string(head)))
-    print_sum(head)
+    return print_sum(head)
+
+
+def part1(values):
+    return determine_pots(values)
+
+
+def part2(values):
+    return determine_pots2(values)
