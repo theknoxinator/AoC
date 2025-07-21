@@ -29,8 +29,6 @@
 
 **Part 2 Completed:** 19/25
 
-**Converted:** 0/20
-
 **TODO:**
 * Day 20.2
 * Day 21

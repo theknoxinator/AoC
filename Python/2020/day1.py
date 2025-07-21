@@ -1,28 +1,23 @@
 # Determine the numbers that make 2020 when added together
-def part1(values):
-    # Let's brute force this by just doing a simple double runner through the list (n^2)
-    answer = 0
+
+def find_sum_values(values, use_part2=False):
+    values = list(map(int, values))
+    # Let's brute force this by just doing a simple set of runners through the list
     for index in range(len(values)):
-        for runner in range(index + 1, len(values)):
-            if int(values[index]) + int(values[runner]) == 2020:
-                answer = int(values[index]) * int(values[runner])
-                break
-        if answer:
-            break
-    return answer
+        for first_runner in range(index + 1, len(values)):
+            if use_part2:
+                for second_runner in range(first_runner + 1, len(values)):
+                    if values[index] + values[first_runner] + values[second_runner] == 2020:
+                        return values[index] * values[first_runner] * values[second_runner]
+            else:
+                if values[index] + values[first_runner] == 2020:
+                    return values[index] * values[first_runner]
+    return 0
+
+
+def part1(values):
+    return find_sum_values(values)
 
 
 def part2(values):
-    # Let's brute force this by just doing a simple double runner through the list (n^3)
-    answer = 0
-    for index in range(len(values)):
-        for first_runner in range(index + 1, len(values)):
-            for second_runner in range(first_runner + 1, len(values)):
-                if int(values[index]) + int(values[first_runner]) + int(values[second_runner]) == 2020:
-                    answer = int(values[index]) * int(values[first_runner]) * int(values[second_runner])
-                    break
-            if answer:
-                break
-        if answer:
-            break
-    return answer
+    return find_sum_values(values, True)
