@@ -44,8 +44,6 @@
 
 **Part 2 Completed:** 12/25
 
-**Converted:** 0/12
-
 **TODO:**
 * Day 13
 * Day 14
