@@ -10,10 +10,6 @@ import day7
 import day8
 
 
-skip_completed = pytest.mark.skipif(True, reason="Day completed")
-
-
-@skip_completed
 class TestDay1:
     problem = "Day1/input.txt"
     sample1 = "Day1/sample1.txt"
@@ -31,7 +27,6 @@ class TestDay1:
         run(self.problem, day1.part2)
 
 
-@skip_completed
 class TestDay2:
     problem = "Day2/input.txt"
     sample1 = "Day2/sample1.txt"
@@ -49,7 +44,6 @@ class TestDay2:
         run(self.problem, day2.part2)
 
 
-@skip_completed
 class TestDay3:
     problem = "Day3/input.txt"
     sample1 = "Day3/sample1.txt"
@@ -67,7 +61,6 @@ class TestDay3:
         run(self.problem, day3.part2)
 
 
-@skip_completed
 class TestDay4:
     problem = "Day4/input.txt"
     sample1 = "Day4/sample1.txt"
@@ -85,7 +78,6 @@ class TestDay4:
         run(self.problem, day4.part2)
 
 
-@skip_completed
 class TestDay5:
     problem = "Day5/input.txt"
     sample1 = "Day5/sample1.txt"
@@ -103,7 +95,6 @@ class TestDay5:
         run(self.problem, day5.part2)
 
 
-@skip_completed
 class TestDay6:
     problem = "Day6/input.txt"
     sample1 = "Day6/sample1.txt"
@@ -121,7 +112,6 @@ class TestDay6:
         run(self.problem, day6.part2)
 
 
-@skip_completed
 class TestDay7:
     problem = "Day7/input.txt"
     sample1 = "Day7/sample1.txt"

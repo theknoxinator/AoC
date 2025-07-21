@@ -1,9 +1,9 @@
 # Advent of Code
 
 ## 2021
-**Part 1 Completed:** 0/25
+**Part 1 Completed:** 8/25
 
-**Part 2 Completed:** 0/25
+**Part 2 Completed:** 8/25
 
 #### TODO:
 * Day 9
