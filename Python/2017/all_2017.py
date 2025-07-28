@@ -13,6 +13,14 @@ import day10
 import day11
 import day12
 import day13
+import day14
+import day15
+import day16
+import day17
+import day18
+import day19
+import day20
+import day21
 
 
 class TestDay1:
@@ -260,8 +268,140 @@ class TestDay13:
     def test_part1(self):
         run(self.problem, day13.part1)
 
-    # def test_sample2(self):
-    #     check(self.sample1, day13.part2, 2)
-    #
-    # def test_part2(self):
-    #     run(self.problem, day13.part2)
+    def test_sample2(self):
+        check(self.sample1, day13.part2, 10)
+
+    def test_part2(self):
+        run(self.problem, day13.part2)
+
+
+class TestDay14:
+    problem = "Day14/input.txt"
+    sample1 = "Day14/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day14.part1, 8108)
+
+    def test_part1(self):
+        run(self.problem, day14.part1)
+
+    def test_sample2(self):
+        check(self.sample1, day14.part2, 1242)
+
+    def test_part2(self):
+        run(self.problem, day14.part2)
+
+
+class TestDay15:
+    problem = "Day15/input.txt"
+    sample1 = "Day15/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day15.part1, 588)
+
+    def test_part1(self):
+        run(self.problem, day15.part1)
+
+    def test_sample2(self):
+        check(self.sample1, day15.part2, 309)
+
+    def test_part2(self):
+        run(self.problem, day15.part2)
+
+
+class TestDay16:
+    problem = "Day16/input.txt"
+    sample1 = "Day16/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day16.part1, "baedc")
+
+    def test_part1(self):
+        run(self.problem, day16.part1)
+
+    def test_part2(self):
+        run(self.problem, day16.part2)
+
+
+class TestDay17:
+    problem = "Day17/input.txt"
+    sample1 = "Day17/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day17.part1, 638)
+
+    def test_part1(self):
+        run(self.problem, day17.part1)
+
+    def test_sample2(self):
+        check(self.sample1, day17.part2, 1222153)
+
+    def test_part2(self):
+        run(self.problem, day17.part2)
+
+
+class TestDay18:
+    problem = "Day18/input.txt"
+    sample1 = "Day18/sample1.txt"
+    sample2 = "Day18/sample2.txt"
+
+    def test_sample(self):
+        check(self.sample1, day18.part1, 4)
+
+    def test_part1(self):
+        run(self.problem, day18.part1)
+
+    def test_sample2(self):
+        check(self.sample2, day18.part2, 3)
+
+    def test_part2(self):
+        run(self.problem, day18.part2)
+
+
+class TestDay19:
+    problem = "Day19/input.txt"
+    sample1 = "Day19/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day19.part1, "ABCDEF", strip_file=False)
+
+    def test_part1(self):
+        run(self.problem, day19.part1, strip_file=False)
+
+    def test_sample2(self):
+        check(self.sample1, day19.part2, 38, strip_file=False)
+
+    def test_part2(self):
+        run(self.problem, day19.part2, strip_file=False)
+
+
+class TestDay20:
+    problem = "Day20/input.txt"
+    sample1 = "Day20/sample1.txt"
+    sample2 = "Day20/sample2.txt"
+
+    def test_sample(self):
+        check(self.sample1, day20.part1, 0)
+
+    def test_part1(self):
+        run(self.problem, day20.part1)
+
+    def test_sample2(self):
+        check(self.sample2, day20.part2, 1)
+
+    def test_part2(self):
+        run(self.problem, day20.part2)
+
+
+class TestDay21:
+    problem = "Day21/input.txt"
+    sample1 = "Day21/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day21.part1, 12)
+
+    def test_part1(self):
+        run(self.problem, day21.part1)
+
+    def test_part2(self):
+        run(self.problem, day21.part2)

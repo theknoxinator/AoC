@@ -1,74 +1,49 @@
 # Determine the number of times we get caught in the firewall
 
-
-def read_file(filename):
-    values = []
-    with open(filename, 'r') as f:
-        for line in f:
-            values.append((int(x) for x in line.strip().replace(' ', '').split(':')))
-    return values
-
-
-def test_data():
-    return [(0,3), (1,2), (4,4), (6,4)]
-
-
-print("Starting Day13-1")
-values = read_file("Day13/input.txt")
-# values = test_data()
-
-def firewall(values):
+def firewall(values, use_part2=False):
     layers = []
     for val in values:
         layers.append((int(x) for x in val.strip().replace(' ', '').split(':')))
 
-    # Setup our grid and starting positions
-    value_map = dict(layers)
-    size = max(value_map.keys()) + 1
-    lengths = [0] * size
-    positions = [None] * size
-    forward = [True] * size
+    # Since we only get caught at the top of the layer, we only need to know on which seconds the top is occupied
+    # This can be calculated as (layer_depth - 2) * 3 + 2
+    # As the layers never change, we can store this is a list of tuples
+    loop_lengths = [(x, y, (y - 2) * 2 + 2) for x, y in layers]
 
-    for i in range(size):
-        if i in value_map:
-            lengths[i] = value_map[i]
-            positions[i] = 0
+    # To go through the firewall, we check each loop length against the offset + layer_depth
+    # Put this check in a function so that it can be reused for part 2 where offset increments
+    offset = 0
+    def get_violations(offset, loop_lengths, interrupt=False):
+        violations = []
+        for layer, depth, loop in loop_lengths:
+            if (offset + layer) % loop == 0:
+                # We have a collision, add to violations list
+                violations.append((layer, depth))
+            if violations and interrupt:
+                break
+        return violations
 
-    # Now go through the firewall
-    current = 0
-    violations = []
-    while current < size:
-        # Do the check first
-        if positions[current] == 0:
-            violations.append(current)
+    if not use_part2:
+        violations = get_violations(offset, loop_lengths)
+        severity = 0
+        for layer, depth in violations:
+            severity += layer * depth
 
-        # Move ourselves forward
-        current += 1
+        return severity
 
-        # Now tick each layer
-        for i in range(size):
-            # Skip if length is 0
-            if lengths[i] == 0:
-                continue
-
-            # Check first to see if we need to change direction
-            if forward[i] and positions[i] == lengths[i] - 1:
-                forward[i] = False
-            elif not forward[i] and positions[i] == 0:
-                forward[i] = True
-
-            # Now move in direction
-            if forward[i]:
-                positions[i] += 1
-            else:
-                positions[i] -= 1
-
-    severity = 0
-    for violation in violations:
-        severity += violation * lengths[violation]
-
-    return severity
+    # For part 2, we increase offset until we get a set with no violations (runs at O(n^2))
+    # Since we know layer 1 is only 2 depth (in real problem and sample), we can rule out all odd seconds
+    while True:
+        violations = get_violations(offset, loop_lengths, True)
+        if violations:
+            offset += 2
+        else:
+            return offset
 
 
 def part1(values):
     return firewall(values)
+
+
+def part2(values):
+    return firewall(values, True)
