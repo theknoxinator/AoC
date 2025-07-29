@@ -21,6 +21,10 @@ import day18
 import day19
 import day20
 import day21
+import day22
+import day23
+import day24
+import day25
 
 
 class TestDay1:
@@ -405,3 +409,59 @@ class TestDay21:
 
     def test_part2(self):
         run(self.problem, day21.part2)
+
+
+class TestDay22:
+    problem = "Day22/input.txt"
+    sample1 = "Day22/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day22.part1, 5587)
+
+    def test_part1(self):
+        run(self.problem, day22.part1)
+
+    def test_sample2(self):
+        check(self.sample1, day22.part2, 2511944)
+
+    def test_part2(self):
+        run(self.problem, day22.part2)
+
+
+class TestDay23:
+    problem = "Day23/input.txt"
+    problem2 = "Day23/modified_input.txt"
+
+    def test_part1(self):
+        run(self.problem, day23.part1)
+
+    def test_part2(self):
+        run(self.problem2, day23.part2)
+
+
+class TestDay24:
+    problem = "Day24/input.txt"
+    sample1 = "Day24/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day24.part1, 31)
+
+    def test_part1(self):
+        run(self.problem, day24.part1)
+
+    def test_sample2(self):
+        check(self.sample1, day24.part2, 19)
+
+    def test_part2(self):
+        run(self.problem, day24.part2)
+
+
+class TestDay25:
+    problem = "Day25/input.txt"
+    sample1 = "Day25/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day25.part1, 3)
+
+    def test_part1(self):
+        run(self.problem, day25.part1)

@@ -80,15 +80,9 @@
 * Day 25
 
 ## 2017
-**Part 1 Completed:** 21/25
+**Part 1 Completed:** 25/25
 
-**Part 2 Completed:** 21/25
-
-**TODO:**
-* Day 22
-* Day 23
-* Day 24
-* Day 25
+**Part 2 Completed:** 25/25
 
 ## 2016
 **Part 1 Completed:** 25/25
