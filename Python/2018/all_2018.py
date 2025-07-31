@@ -19,6 +19,12 @@ import day16
 import day17
 import day18
 import day19
+import day20
+import day21
+import day22
+import day23
+import day24
+import day25
 
 
 class TestDay1:
@@ -322,3 +328,106 @@ class TestDay19:
 
     def test_part2(self):
         run(self.problem, day19.part2)
+
+
+class TestDay20:
+    problem = "Day20/input.txt"
+    sample1 = "Day20/sample1.txt"
+    sample2 = "Day20/sample2.txt"
+    sample3 = "Day20/sample3.txt"
+
+    @pytest.mark.parametrize("sample,expected", {
+        (sample1, 31), (sample2, 23), (sample3, 18)
+    })
+    def test_sample(self, sample, expected):
+        check(sample, day20.part1, expected)
+
+    def test_part1(self):
+        run(self.problem, day20.part1)
+
+    @pytest.mark.parametrize("sample,expected", {
+        (sample1, 39), (sample2, 25), (sample3, 13)
+    })
+    def test_sample(self, sample, expected):
+        check(sample, day20.part2, expected)
+
+    def test_part2(self):
+        run(self.problem, day20.part2)
+
+
+class TestDay21:
+    problem = "Day21/input.txt"
+
+    def test_part1(self):
+        run(self.problem, day21.part1)
+
+    def test_part2(self):
+        run(self.problem, day21.part2)
+
+
+class TestDay22:
+    problem = "Day22/input.txt"
+    sample1 = "Day22/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day22.part1, 114)
+
+    def test_part1(self):
+        run(self.problem, day22.part1)
+
+    def test_sample2(self):
+        check(self.sample1, day22.part2, 45)
+
+    def test_part2(self):
+        run(self.problem, day22.part2)
+
+
+class TestDay23:
+    problem = "Day23/input.txt"
+    sample1 = "Day23/sample1.txt"
+    sample2 = "Day23/sample2.txt"
+
+    def test_sample(self):
+        check(self.sample1, day23.part1, 7)
+
+    def test_part1(self):
+        run(self.problem, day23.part1)
+
+    def test_sample2(self):
+        check(self.sample2, day23.part2, 36)
+
+    def test_part2(self):
+        run(self.problem, day23.part2)
+
+
+class TestDay24:
+    problem = "Day24/input.txt"
+    sample1 = "Day24/sample1.txt"
+
+    def test_sample(self):
+        check(self.sample1, day24.part1, 5216)
+
+    def test_part1(self):
+        run(self.problem, day24.part1)
+
+    def test_sample2(self):
+        check(self.sample1, day24.part2, 51)
+
+    def test_part2(self):
+        run(self.problem, day24.part2)
+
+
+class TestDay25:
+    problem = "Day25/input.txt"
+    sample1 = "Day25/sample1.txt"
+    sample2 = "Day25/sample2.txt"
+    sample3 = "Day25/sample3.txt"
+
+    @pytest.mark.parametrize("sample,expected", {
+        (sample1, 4), (sample2, 3), (sample3, 8)
+    })
+    def test_sample(self, sample, expected):
+        check(sample, day25.part1, expected)
+
+    def test_part1(self):
+        run(self.problem, day25.part1)

@@ -6,8 +6,9 @@
 * 2017 Day 7 / 2018 Day 7/8 - Making and using a tree
 * 2017 Day 17 / 2018 Day 14 - Making and using a linked list
 * 2019 Day 7/9/11 - Simulating a computer program (intcode)
-* 2020 Day 8 - Simulating a computer program (assembly)
+* 2017 Day 23 / 2020 Day 8 - Simulating a computer program (assembly)
 * 2020 Day 18 - Expression parsing (aka reading a math formula)
+* 2018 Day 22 - Actual good implementation of pathfinding using heap
 
 ## 2021
 **Part 1 Completed:** 8/25
@@ -67,17 +68,9 @@
 * Day 25
 
 ## 2018
-**Part 1 Completed:** 19/25
+**Part 1 Completed:** 25/25
 
-**Part 2 Completed:** 19/25
-
-**TODO:**
-* Day 20
-* Day 21
-* Day 22
-* Day 23
-* Day 24
-* Day 25
+**Part 2 Completed:** 25/25
 
 ## 2017
 **Part 1 Completed:** 25/25
