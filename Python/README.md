@@ -48,15 +48,11 @@
 * Day 25
 
 ## 2019
-**Part 1 Completed:** 12/25
+**Part 1 Completed:** 16/25
 
-**Part 2 Completed:** 12/25
+**Part 2 Completed:** 16/25
 
 **TODO:**
-* Day 13
-* Day 14
-* Day 15
-* Day 16
 * Day 17
 * Day 18
 * Day 19
